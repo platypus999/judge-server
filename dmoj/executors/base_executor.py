@@ -324,8 +324,11 @@ class BaseExecutor(metaclass=ExecutorMeta):
     def initialize(cls) -> bool:
         command = cls.get_command()
         if command is None:
+            print(f"Error: Command is None! (Specify in judge.yml)")
             return False
+        print(f"Testing command: {command}")
         if not os.path.isfile(command):
+            print(f"Error: Command is not in judge environment!")
             return False
         return skip_self_test or cls.run_self_test()
 

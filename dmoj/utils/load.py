@@ -35,13 +35,16 @@ def load_modules(
         print(loading_message)
 
     for name in to_load:
+        print(f"Start loading: {name}")
         module = load(name)
 
         if module is None or not hasattr(module, attr):
+            print(f"{name}.py does not exist in executors directory")
             continue
 
         cls = getattr(module, attr)
         if hasattr(cls, 'initialize') and not cls.initialize():
+            print(f"{name}.py: Error in initialize()")
             continue
 
         if hasattr(module, 'aliases'):
