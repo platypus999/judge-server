@@ -322,9 +322,10 @@ class BaseExecutor(metaclass=ExecutorMeta):
 
     @classmethod
     def initialize(cls) -> bool:
+        print(f"Searching for command id: {cls.command}")
         command = cls.get_command()
         if command is None:
-            print(f"Error: Command is None! (Specify in judge.yml)")
+            print(f"Error: Command is None! (Specify value of {cls.command} in judge.yml)")
             return False
         print(f"Testing command: {command}")
         if not os.path.isfile(command):
